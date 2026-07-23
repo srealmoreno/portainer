@@ -1,0 +1,23 @@
+services:
+  api:
+    image: ghcr.io/srealmoreno/api:latest
+    container_name: api
+    restart: unless-stopped
+
+    environment:
+      PORT: 3000
+
+      VIRTUAL_HOST: api.srealmoreno.com
+      VIRTUAL_PORT: 3000
+      LETSENCRYPT_HOST: api.srealmoreno.com
+      LETSENCRYPT_EMAIL: tu-correo@dominio.com
+
+    expose:
+      - "3000"
+
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
