@@ -10,7 +10,7 @@ services:
       VIRTUAL_HOST: api.srealmoreno.com
       VIRTUAL_PORT: 3000
       LETSENCRYPT_HOST: api.srealmoreno.com
-      LETSENCRYPT_EMAIL: tu-correo@dominio.com
+      LETSENCRYPT_EMAIL: admin@srealmoreno.com
 
     expose:
       - "3000"
