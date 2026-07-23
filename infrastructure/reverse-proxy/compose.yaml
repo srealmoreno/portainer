@@ -1,0 +1,47 @@
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:1.7
+    container_name: nginx-proxy
+    restart: unless-stopped
+
+    ports:
+      - "80:80"
+      - "443:443"
+
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+    networks:
+      - proxy
+
+  acme-companion:
+    image: nginxproxy/acme-companion:2.6
+    container_name: acme-companion
+    restart: unless-stopped
+
+    depends_on:
+      - nginx-proxy
+
+    environment:
+      DEFAULT_EMAIL: tu-correo@dominio.com
+
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+    networks:
+      - proxy
+
+volumes:
+  certs:
+  vhost:
+  html:
+
+networks:
+  proxy:
+    external: true
