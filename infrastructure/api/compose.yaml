@@ -11,6 +11,8 @@ services:
       VIRTUAL_PORT: 3000
       LETSENCRYPT_HOST: api.srealmoreno.com
       LETSENCRYPT_EMAIL: admin@srealmoreno.com
+      # Usara los valores de portainer
+      NAME: ${NAME}
 
     expose:
       - "3000"
